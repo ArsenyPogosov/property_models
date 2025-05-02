@@ -1,0 +1,13 @@
+---
+BasedOnStyle: Google
+IndentWidth: '4'
+TabWidth: '4'
+UseTab: ForIndentation
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+BreakBeforeBraces: Allman
+IndentAccessModifiers: false
+AccessModifierOffset: -4
+...
+

@@ -1,0 +1,51 @@
+---
+HeaderFilterRegex: '\.h$'
+WarningsAsErrors: '*'
+
+Checks: >
+  -*,
+  readability-*,
+  modernize-*,
+  performance-*,
+  bugprone-*,
+  cppcoreguidelines-*,
+  google-*,
+  hicpp-*,
+  clang-analyzer-*,
+  portability-*,
+  cert-*,
+  -modernize-use-trailing-return-type,
+  -readability-identifier-length,
+  -bugprone-chained-comparison,
+  -cppcoreguidelines-avoid-do-while,
+
+CheckOptions:
+  - key: readability-identifier-naming.NamespaceCase
+    value: lower_case
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+  - key: readability-identifier-naming.TypedefCase
+    value: CamelCase
+  - key: readability-identifier-naming.TypeAliasCase
+    value: CamelCase
+  - key: readability-identifier-naming.PrivateMemberSuffix
+    value: '_'
+  - key: readability-identifier-naming.StructCase
+    value: CamelCase
+  - key: readability-identifier-naming.FunctionCase
+    value: CamelCase
+  - key: readability-identifier-naming.VariableCase
+    value: lower_case
+  - key: readability-identifier-naming.PrivateMemberCase
+    value: lower_case
+  - key: readability-identifier-naming.ParameterCase
+    value: lower_case
+  - key: readability-identifier-naming.GlobalConstantCase
+    value: CamelCase
+  - key: readability-identifier-naming.StaticConstantCase
+    value: CamelCase
+  - key: readability-identifier-naming.ConstexprVariableCase
+    value: CamelCase
+  - key: google-runtime-int.TypeSuffix
+    value: _t
+
