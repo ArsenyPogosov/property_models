@@ -16,36 +16,53 @@ Checks: >
   cert-*,
   -modernize-use-trailing-return-type,
   -readability-identifier-length,
-  -bugprone-chained-comparison,
   -cppcoreguidelines-avoid-do-while,
+  -readability-use-anyofallof,
+  -cert-err58-cpp,
 
 CheckOptions:
   - key: readability-identifier-naming.NamespaceCase
-    value: lower_case
+    value: CamelCase
+  - key: readability-identifier-naming.NamespacePrefix
+    value: N
   - key: readability-identifier-naming.ClassCase
     value: CamelCase
+  - key: readability-identifier-naming.ClassPrefix
+    value: T
   - key: readability-identifier-naming.TypedefCase
     value: CamelCase
+  - key: readability-identifier-naming.TypedefPrefix
+    value: T
   - key: readability-identifier-naming.TypeAliasCase
+    value: CamelCase
+  - key: readability-identifier-naming.TypeAliasPrefix
+    value: T
+  - key: readability-identifier-naming.StructCase
+    value: CamelCase
+  - key: readability-identifier-naming.StructPrefix
+    value: T
+  - key: readability-identifier-naming.EnumCase
+    value: CamelCase
+  - key: readability-identifier-naming.EnumPrefix
+    value: E
+  - key: readability-identifier-naming.EnumConstantCase
+    value: CamelCase
+  - key: readability-identifier-naming.PrivateMemberCase
     value: CamelCase
   - key: readability-identifier-naming.PrivateMemberSuffix
     value: '_'
-  - key: readability-identifier-naming.StructCase
+  - key: readability-identifier-naming.PublicMemberCase
     value: CamelCase
   - key: readability-identifier-naming.FunctionCase
     value: CamelCase
   - key: readability-identifier-naming.VariableCase
-    value: lower_case
-  - key: readability-identifier-naming.PrivateMemberCase
-    value: lower_case
+    value: camelBack
   - key: readability-identifier-naming.ParameterCase
-    value: lower_case
+    value: camelBack
   - key: readability-identifier-naming.GlobalConstantCase
-    value: CamelCase
+    value: UPPER_CASE
   - key: readability-identifier-naming.StaticConstantCase
-    value: CamelCase
+    value: UPPER_CASE
   - key: readability-identifier-naming.ConstexprVariableCase
-    value: CamelCase
-  - key: google-runtime-int.TypeSuffix
-    value: _t
+    value: UPPER_CASE
 

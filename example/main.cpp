@@ -1,10 +1,7 @@
 #include <iostream>
 
-#include "property_models/temp.h"
-
-int main()
-{
-	std::cout << GetGreeting() << '\n';
+int main() {
+	std::cout << "Hello, World!\n";
 
 	return 0;
 }
