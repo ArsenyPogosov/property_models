@@ -10,9 +10,9 @@ class TCombinedSolver {
 public:
 	explicit TCombinedSolver(std::vector<TSolver> slaves);
 
-	[[nodiscard]] bool IsApplicable(const TTask &task) const;
+	[[nodiscard]] EApplicability IsApplicable(const TTask &task) const;
 
-	[[nodiscard]] TSolution Solve(const TTask &task) const;
+	[[nodiscard]] std::optional<TSolution> TrySolve(const TTask &task) const;
 
 private:
 	std::vector<TSolver> Slaves_;
