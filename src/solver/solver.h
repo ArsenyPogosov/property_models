@@ -46,13 +46,13 @@ private:
 	    Solve_;
 };
 
-TSolver GetSolver();
+[[nodiscard]] TSolver GetSolver();
 
 /////////////////////////////////////////////////////////////////////////
 
 template <typename T>
     requires(!std::is_same_v<std::decay_t<T>, TSolver>)
-TSolver::TSolver(T &&solver)
+inline TSolver::TSolver(T &&solver)
     : Solver_(std::forward<T>(solver)),
       IsApplicable_(
           [](const std::any &solver, const TTask &task) -> EApplicability {
@@ -64,11 +64,12 @@ TSolver::TSolver(T &&solver)
       }) {
 }
 
-[[nodiscard]] EApplicability TSolver::IsApplicable(const TTask &task) const {
+[[nodiscard]] inline EApplicability TSolver::IsApplicable(
+    const TTask &task) const {
 	return IsApplicable_(Solver_, task);
 }
 
-[[nodiscard]] std::optional<TSolution> TSolver::TrySolve(
+[[nodiscard]] inline std::optional<TSolution> TSolver::TrySolve(
     const TTask &task) const {
 	return Solve_(Solver_, task);
 }

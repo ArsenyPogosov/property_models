@@ -9,5 +9,8 @@ AllowShortLoopsOnASingleLine: false
 BreakBeforeBraces: Attach
 IndentAccessModifiers: false
 AccessModifierOffset: -4
+KeepEmptyLinesAtTheStartOfBlocks: true
+AllowShortBlocksOnASingleLine: false
+BinPackArguments: false
 ...
 

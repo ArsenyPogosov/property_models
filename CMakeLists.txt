@@ -21,9 +21,8 @@ option(
 # property_models
 add_library(
 	property_models
-	src/solver/solver.cpp
-	src/solver/combined.cpp
 )
+add_subdirectory(src)
 target_include_directories(
 	property_models
 	INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include"

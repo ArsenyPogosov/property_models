@@ -15,8 +15,8 @@ list(
 
 add_executable(
 	tests
-	temp.cpp
 )
+add_subdirectory(solver)
 target_include_directories(
 	tests
 	PRIVATE "${CMAKE_SOURCE_DIR}/include/property_models"
