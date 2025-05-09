@@ -27,6 +27,9 @@ Checks: >
   -google-build-using-namespace,
   -bugprone-unchecked-optional-access,
   -readability-magic-numbers,
+  -hicpp-uppercase-literal-suffix,
+  -readability-uppercase-literal-suffix,
+  -readability-implicit-bool-conversion,
 
 CheckOptions:
   - key: readability-identifier-naming.NamespaceCase

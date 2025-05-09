@@ -3,5 +3,6 @@ target_sources(
 	PRIVATE solver.cpp
 			combined.cpp
 			maximum_matching.cpp
+			quick_plan.cpp
 )
 

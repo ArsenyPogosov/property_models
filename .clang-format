@@ -12,5 +12,6 @@ AccessModifierOffset: -4
 KeepEmptyLinesAtTheStartOfBlocks: true
 AllowShortBlocksOnASingleLine: false
 BinPackArguments: false
+ColumnLimit: 0
 ...
 

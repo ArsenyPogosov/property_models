@@ -4,7 +4,7 @@
 
 namespace NPropertyModels::NSolver {
 
-class TMaximumMatchingSolver {
+class TQuickPlanSolver {
 public:
 	[[nodiscard]] EApplicability IsApplicable(const TTask &task) const;
 
