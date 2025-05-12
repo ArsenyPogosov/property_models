@@ -10,8 +10,7 @@ namespace {
 
 using namespace Catch::Matchers;
 
-TEST_CASE("quick plan implemets is applicable right",
-          "[solver][quick_plan][is_applicable]") {
+TEST_CASE("quick plan implemets is applicable right", "[solver][quick_plan][is_applicable]") {
 	TSolver solver{TQuickPlanSolver{}};
 
 	SECTION("incorrect task") {
@@ -48,7 +47,8 @@ TEST_CASE("quick plan implemets is applicable right",
 		                .OutputPropertieIds = {0},
 		            },
 		        },
-		    });
+		    }
+		);
 
 		CHECK_THROWS(solver.IsApplicable(task));
 	}
@@ -101,8 +101,7 @@ TEST_CASE("quick plan implemets is applicable right",
 	}
 }
 
-TEST_CASE("quick plan implemets try solve right",
-          "[solver][quick_plan][try_solve]") {
+TEST_CASE("quick plan implemets try solve right", "[solver][quick_plan][try_solve]") {
 	TSolver solver{TQuickPlanSolver{}};
 
 	SECTION("empty task") {
@@ -126,7 +125,8 @@ TEST_CASE("quick plan implemets try solve right",
 		        .PropertiesCount = 5,
 		        .ConstraintsCount = 5,
 		        .CSMs{},
-		    });
+		    }
+		);
 
 		std::optional<TSolution> solution;
 		REQUIRE_NOTHROW(solution = solver.TrySolve(task));
@@ -169,7 +169,8 @@ TEST_CASE("quick plan implemets try solve right",
 		                .OutputPropertieIds = {0},
 		            },
 		        },
-		    });
+		    }
+		);
 
 		std::optional<TSolution> solution;
 		CHECK_THROWS(solution = solver.TrySolve(task));
@@ -297,8 +298,7 @@ TEST_CASE("quick plan implemets try solve right",
 		REQUIRE_NOTHROW(solution = solver.TrySolve(task));
 
 		REQUIRE(solution.has_value());
-		CHECK_THAT(solution.value().CSMIds,
-		           UnorderedEquals(std::vector<size_t>{0, 1, 3, 7}));
+		CHECK_THAT(solution.value().CSMIds, UnorderedEquals(std::vector<size_t>{0, 1, 3, 7}));
 	}
 
 	SECTION("right order") {
@@ -338,8 +338,7 @@ TEST_CASE("quick plan implemets try solve right",
 		REQUIRE_NOTHROW(solution = solver.TrySolve(task));
 
 		REQUIRE(solution.has_value());
-		CHECK_THAT(solution.value().CSMIds,
-		           Equals(std::vector<size_t>{2, 1, 4, 0, 3}));
+		CHECK_THAT(solution.value().CSMIds, Equals(std::vector<size_t>{2, 1, 4, 0, 3}));
 	}
 }
 

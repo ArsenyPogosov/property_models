@@ -24,7 +24,8 @@ struct TGraph {
 
 // kuhn O(VE)
 [[nodiscard]] std::vector<size_t> GetMaxCostMatching(
-    const TBipartiteGraph &graph) {
+    const TBipartiteGraph &graph
+) {
 	std::vector<std::vector<size_t>> edgeIds(graph.FirstPartCount);
 	for (size_t id = 0; id < graph.Edges.size(); ++id) {
 		const TEdge &edge = graph.Edges[id];
@@ -86,7 +87,8 @@ struct TGraph {
 }
 
 [[nodiscard]] std::optional<std::vector<size_t>> GetTopOrder(
-    const TGraph &graph) {
+    const TGraph &graph
+) {
 	std::vector<std::vector<size_t>> adjacencyList(graph.VerticesCount);
 	for (const auto &[fromId, toId] : graph.Edges) {
 		adjacencyList[fromId].push_back(toId);
@@ -156,12 +158,12 @@ EApplicability TMaximumMatchingSolver::IsApplicable(const TTask &task) const {
 			}
 		}
 
-		std::unordered_set<size_t> inputSet(csm.InputPropertieIds.begin(),
-		                                    csm.InputPropertieIds.end());
+		std::unordered_set<size_t> inputSet(csm.InputPropertieIds.begin(), csm.InputPropertieIds.end());
 		for (const auto &id : csm.OutputPropertieIds) {
 			if (inputSet.contains(id)) {
 				throw std::invalid_argument(
-				    "input and output properties intersect");
+				    "input and output properties intersect"
+				);
 			}
 		}
 
@@ -174,7 +176,8 @@ EApplicability TMaximumMatchingSolver::IsApplicable(const TTask &task) const {
 }
 
 std::optional<TSolution> TMaximumMatchingSolver::TrySolve(
-    const TTask &task) const {
+    const TTask &task
+) const {
 	switch (IsApplicable(task)) {
 		case EApplicability::NOT_APPLICABLE: {
 			return std::nullopt;
@@ -250,7 +253,8 @@ std::optional<TSolution> TMaximumMatchingSolver::TrySolve(
 			    return topOrder[task.CSMs[i].ConstraintId];
 		    };
 		    return getValue(a) < getValue(b);
-	    });
+	    }
+	);
 
 	return solution;
 }

@@ -13,5 +13,6 @@ KeepEmptyLinesAtTheStartOfBlocks: true
 AllowShortBlocksOnASingleLine: false
 BinPackArguments: false
 ColumnLimit: 0
+AlignAfterOpenBracket: BlockIndent
 ...
 

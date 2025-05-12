@@ -10,8 +10,7 @@ namespace {
 
 using namespace Catch::Matchers;
 
-TEST_CASE("maximum matching implemets is applicable right",
-          "[solver][maximum_matching][is_applicable]") {
+TEST_CASE("maximum matching implemets is applicable right", "[solver][maximum_matching][is_applicable]") {
 	TSolver solver{TMaximumMatchingSolver{}};
 
 	SECTION("incorrect task") {
@@ -48,7 +47,8 @@ TEST_CASE("maximum matching implemets is applicable right",
 		                .OutputPropertieIds = {0},
 		            },
 		        },
-		    });
+		    }
+		);
 
 		CHECK_THROWS(solver.IsApplicable(task));
 	}
@@ -102,14 +102,14 @@ TEST_CASE("maximum matching implemets is applicable right",
 		                .OutputPropertieIds = {1},
 		            },
 		        },
-		    });
+		    }
+		);
 
 		CHECK(solver.IsApplicable(task) == EApplicability::MAYBE_APPLICABLE);
 	}
 }
 
-TEST_CASE("maximum matching implemets try solve right",
-          "[solver][maximum_matching][try_solve]") {
+TEST_CASE("maximum matching implemets try solve right", "[solver][maximum_matching][try_solve]") {
 	TSolver solver{TMaximumMatchingSolver{}};
 
 	SECTION("empty task") {
@@ -133,7 +133,8 @@ TEST_CASE("maximum matching implemets try solve right",
 		        .PropertiesCount = 5,
 		        .ConstraintsCount = 5,
 		        .CSMs{},
-		    });
+		    }
+		);
 
 		std::optional<TSolution> solution;
 		REQUIRE_NOTHROW(solution = solver.TrySolve(task));
@@ -176,7 +177,8 @@ TEST_CASE("maximum matching implemets try solve right",
 		                .OutputPropertieIds = {0},
 		            },
 		        },
-		    });
+		    }
+		);
 
 		std::optional<TSolution> solution;
 		CHECK_THROWS(solution = solver.TrySolve(task));
@@ -215,7 +217,8 @@ TEST_CASE("maximum matching implemets try solve right",
 		                .OutputPropertieIds = {0},
 		            },
 		        },
-		    });
+		    }
+		);
 
 		std::optional<TSolution> solution;
 		REQUIRE_NOTHROW(solution = solver.TrySolve(task));
@@ -257,8 +260,7 @@ TEST_CASE("maximum matching implemets try solve right",
 		REQUIRE_NOTHROW(solution = solver.TrySolve(task));
 
 		REQUIRE(solution.has_value());
-		CHECK_THAT(solution.value().CSMIds,
-		           UnorderedEquals(std::vector<size_t>{1, 2}));
+		CHECK_THAT(solution.value().CSMIds, UnorderedEquals(std::vector<size_t>{1, 2}));
 	}
 
 	SECTION("hard") {
@@ -322,8 +324,7 @@ TEST_CASE("maximum matching implemets try solve right",
 		REQUIRE_NOTHROW(solution = solver.TrySolve(task));
 
 		REQUIRE(solution.has_value());
-		CHECK_THAT(solution.value().CSMIds,
-		           UnorderedEquals(std::vector<size_t>{0, 1, 3, 7}));
+		CHECK_THAT(solution.value().CSMIds, UnorderedEquals(std::vector<size_t>{0, 1, 3, 7}));
 	}
 
 	SECTION("right order") {
@@ -363,8 +364,7 @@ TEST_CASE("maximum matching implemets try solve right",
 		REQUIRE_NOTHROW(solution = solver.TrySolve(task));
 
 		REQUIRE(solution.has_value());
-		CHECK_THAT(solution.value().CSMIds,
-		           Equals(std::vector<size_t>{2, 1, 4, 0, 3}));
+		CHECK_THAT(solution.value().CSMIds, Equals(std::vector<size_t>{2, 1, 4, 0, 3}));
 	}
 }
 

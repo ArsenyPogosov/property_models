@@ -57,20 +57,22 @@ inline TSolver::TSolver(T &&solver)
       IsApplicable_(
           [](const std::any &solver, const TTask &task) -> EApplicability {
 	          return std::any_cast<const T &>(solver).IsApplicable(task);
-          }),
-      Solve_([](const std::any &solver,
-                const TTask &task) -> std::optional<TSolution> {
+          }
+      ),
+      Solve_([](const std::any &solver, const TTask &task) -> std::optional<TSolution> {
 	      return std::any_cast<const T &>(solver).TrySolve(task);
       }) {
 }
 
 [[nodiscard]] inline EApplicability TSolver::IsApplicable(
-    const TTask &task) const {
+    const TTask &task
+) const {
 	return IsApplicable_(Solver_, task);
 }
 
 [[nodiscard]] inline std::optional<TSolution> TSolver::TrySolve(
-    const TTask &task) const {
+    const TTask &task
+) const {
 	return Solve_(Solver_, task);
 }
 

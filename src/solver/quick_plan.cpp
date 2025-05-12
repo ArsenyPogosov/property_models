@@ -296,12 +296,12 @@ EApplicability TQuickPlanSolver::IsApplicable(const TTask &task) const {
 			}
 		}
 
-		std::unordered_set<size_t> inputSet(csm.InputPropertieIds.begin(),
-		                                    csm.InputPropertieIds.end());
+		std::unordered_set<size_t> inputSet(csm.InputPropertieIds.begin(), csm.InputPropertieIds.end());
 		for (const auto &id : csm.OutputPropertieIds) {
 			if (inputSet.contains(id)) {
 				throw std::invalid_argument(
-				    "input and output properties intersect");
+				    "input and output properties intersect"
+				);
 			}
 		}
 

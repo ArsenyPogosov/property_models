@@ -30,6 +30,14 @@ Checks: >
   -hicpp-uppercase-literal-suffix,
   -readability-uppercase-literal-suffix,
   -readability-implicit-bool-conversion,
+  -bugprone-exception-escape,
+  -redundant-access-specifiers,
+  -readability-redundant-access-specifiers,
+  -cppcoreguidelines-macro-usage,
+  -bugprone-macro-parentheses,
+  -cppcoreguidelines-avoid-const-or-ref-data-members,
+  -cppcoreguidelines-special-member-functions,
+  -hicpp-special-member-functions
 
 CheckOptions:
   - key: readability-identifier-naming.NamespaceCase
