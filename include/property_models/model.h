@@ -49,14 +49,12 @@ protected:
 
 private:
 	friend TModel;
-	TPropertyModel() = default;
-
-private:
 	template <typename, typename>
 	friend class TProperty;
 	template <typename>
 	friend class TConstraint;
 	friend class TFreezeGuard;
+	TPropertyModel() = default;
 
 private:
 	size_t RegisterProperty();
@@ -70,6 +68,7 @@ private:
 
 private:
 	bool Freezed_ = false;
+	bool Updating_ = false;
 	std::function<void()> Callback_;
 	size_t Time_ = 0;
 	std::vector<size_t> PropertySetTime_;
@@ -104,6 +103,7 @@ public:
 
 private:
 	friend TModel;
+	friend TPropertyModel<TModel>;
 	~TProperty();
 
 private:
@@ -140,6 +140,7 @@ public:
 
 private:
 	friend TModel;
+	friend TPropertyModel<TModel>;
 
 	template <typename... T>
 	    requires((std::same_as<std::remove_cvref_t<T>, TCSM<TModel>> && ...))
@@ -152,7 +153,7 @@ private:
 	~TConstraint();
 
 private:
-	[[nodiscard]] std::vector<TCSM<TModel>> GetCSMs() const;
+	[[nodiscard]] std::vector<std::reference_wrapper<TCSM<TModel>>> GetCSMs();
 	void OnSet();
 
 private:

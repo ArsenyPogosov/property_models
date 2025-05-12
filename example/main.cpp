@@ -4,11 +4,9 @@
 
 PM_PROPERTY_MODEL(TLol) {
 public:
-	PM_PARAMETER(int, A, 228);
-	PM_PARAMETER(int, B, 1337);
-
-private:
-	PM_PARAMETER(int, C_, 1488);
+	PM_PARAMETER(int, A, 1);
+	PM_PARAMETER(int, B, 2);
+	PM_PARAMETER(int, C, 3);
 
 public:
 	PM_CONSTRAINT(
@@ -16,18 +14,18 @@ public:
 	    PM_IMPORTANCE(228),
 	    PM_CSM(
 	        PM_IN(A, B),
-	        PM_OUT(C_),
-	        C_ = A + B;
+	        PM_OUT(C),
+	        C = A + B;
 	    ),
 	    PM_CSM(
-	        PM_IN(A, C_),
+	        PM_IN(A, C),
 	        PM_OUT(B),
-	        B = C_ - A;
+	        B = C - A;
 	    ),
 	    PM_CSM(
-	        PM_IN(B, C_),
+	        PM_IN(B, C),
 	        PM_OUT(A),
-	        A = C_ - B;
+	        A = C - B;
 	    ),
 	);
 };
@@ -37,12 +35,22 @@ int main() {
 
 	lol.RegisterCallback([&lol]() {
 		static size_t i = 0;
-		std::cout << "CHANGED " << i << ": " << lol.A << ' ' << lol.B << '\n';
+		std::cout << "CHANGED " << i++ << ": " << lol.A << ' ' << lol.B << ' ' << lol.C << '\n';
 	});
 
-	lol.A = 3;
-
-	std::cout << '\n';
+	char h = '0';
+	int x = 0;
+	while (std::cin >> h >> x) {
+		if (h == 'A') {
+			lol.A = x;
+		}
+		if (h == 'B') {
+			lol.B = x;
+		}
+		if (h == 'C') {
+			lol.C = x;
+		}
+	}
 
 	std::cout << lol.ABCConstraint.GetImportance() << '\n';
 

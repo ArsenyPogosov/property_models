@@ -133,6 +133,7 @@ public:
 
 private:
 	friend TModel;
+	friend TPropertyModel<TModel>;
 
 	explicit TPropertyView(TProperty<TValue, TModel> &underlying)
 	    : Underlying_(underlying) {

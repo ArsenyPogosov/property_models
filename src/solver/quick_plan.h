@@ -1,6 +1,8 @@
 #pragma once
 
-#include "solver.h"
+#define NPROPERTY_MODELS_IMPL_ALLOWED
+#include "internal/solver/solver.h"
+#undef NPROPERTY_MODELS_IMPL_ALLOWED
 
 namespace NPropertyModels::NSolver {
 

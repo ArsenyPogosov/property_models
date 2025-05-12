@@ -4,6 +4,8 @@
 
 #include <numeric>
 
+#include "solver/solver.h"
+
 namespace NPropertyModels {
 
 template <typename TModel>
@@ -48,27 +50,87 @@ size_t TPropertyModel<TModel>::RegisterConstraint(TConstraint<TThis> &constraint
 
 template <typename TModel>
 void TPropertyModel<TModel>::OnPropertySet(size_t id) {
+	if (Updating_) {
+		return;
+	};
+
 	PropertySetTime_[id] = ++Time_;
 	Update();
 }
 
 template <typename TModel>
 void TPropertyModel<TModel>::OnConstraintSet(size_t id) {
+	if (Updating_) {
+		return;
+	};
+
 	Update();
 }
 
 template <typename TModel>
 void TPropertyModel<TModel>::Update() {
-	if (Freezed_) {
+	if (Updating_) {
 		return;
 	}
-	Freezed_ = true;
+	Updating_ = true;
 
-	std::vector<size_t> order(PropertySetTime_.size());
-	std::iota(order.begin(), order.end(), 0u);
-	std::ranges::sort(order, [this](size_t a, size_t b) { return PropertySetTime_[a] > PropertySetTime_[b]; });
+	std::vector<size_t> propertyOrder(PropertySetTime_.size());
+	std::iota(propertyOrder.begin(), propertyOrder.end(), 0u);
+	std::ranges::sort(propertyOrder, [this](size_t a, size_t b) { return PropertySetTime_[a] > PropertySetTime_[b]; });
 
-	Freezed_ = false;
+	std::vector<size_t> constraintOrder(Constraints_.size());
+	std::iota(constraintOrder.begin(), constraintOrder.end(), 0u);
+	std::ranges::sort(constraintOrder, [this](size_t a, size_t b) {
+		return Constraints_[a].get().GetImportance() < Constraints_[b].get().GetImportance();
+	});
+
+	NSolver::TTask task{
+	    .PropertiesCount = PropertySetTime_.size(),
+	    .ConstraintsCount = Constraints_.size() + PropertySetTime_.size(),
+	};
+	std::vector<TCSM<TThis> *> backPointers;
+
+	for (size_t constraintNewId = 0; constraintNewId < constraintOrder.size(); ++constraintNewId) {
+		auto &constraint = Constraints_[constraintOrder[constraintNewId]].get();
+		for (auto &csmWrap : constraint.GetCSMs()) {
+			TCSM<TThis> &csm = csmWrap.get();
+
+			task.CSMs.emplace_back(
+			    constraintNewId,
+			    csm.GetInputPropertyIds(),
+			    csm.GetOutputPropertyIds()
+			);
+			backPointers.push_back(&csm);
+		}
+	}
+
+	for (size_t stayConstraintId = 0; stayConstraintId < propertyOrder.size(); ++stayConstraintId) {
+		task.CSMs.emplace_back(
+		    Constraints_.size() + stayConstraintId,
+		    std::vector<size_t>{},
+		    std::vector<size_t>{propertyOrder[stayConstraintId]}
+		);
+		backPointers.push_back(nullptr);
+	}
+
+	NSolver::TSolver solver = NSolver::GetSolver();
+	auto maybeSolution = solver.TrySolve(task);
+
+	if (!maybeSolution) {
+		throw std::logic_error("Property model is to complex to be resolved.");
+	}
+	NSolver::TSolution &solution = maybeSolution.value();
+
+	for (const auto &csmId : solution.CSMIds) {
+		if (!backPointers[csmId]) {
+			continue;
+		};
+		TCSM<TThis> &csm = *backPointers[csmId];
+
+		csm.Apply();
+	}
+
+	Updating_ = false;
 
 	DoCallback();
 }

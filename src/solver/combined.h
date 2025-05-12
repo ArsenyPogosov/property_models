@@ -1,8 +1,10 @@
 #pragma once
 
-#include <vector>
+#define NPROPERTY_MODELS_IMPL_ALLOWED
+#include "internal/solver/solver.h"
+#undef NPROPERTY_MODELS_IMPL_ALLOWED
 
-#include "solver.h"
+#include <vector>
 
 namespace NPropertyModels::NSolver {
 

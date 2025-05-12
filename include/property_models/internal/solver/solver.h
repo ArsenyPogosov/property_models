@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef NPROPERTY_MODELS_IMPL_ALLOWED
+#error "This header may not be included directly. Please include \"property_models/model.h\" instead"
+#endif
+
 #include <any>
 #include <functional>
 #include <vector>

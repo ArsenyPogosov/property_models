@@ -70,8 +70,13 @@ template <typename TModel>
 TConstraint<TModel>::~TConstraint() = default;
 
 template <typename TModel>
-[[nodiscard]] std::vector<TCSM<TModel>> TConstraint<TModel>::GetCSMs() const {
-	return CSMs_;
+[[nodiscard]] std::vector<std::reference_wrapper<TCSM<TModel>>> TConstraint<TModel>::GetCSMs() {
+	std::vector<std::reference_wrapper<TCSM<TModel>>> result;
+	result.reserve(CSMs_.size());
+	for (auto& csm : CSMs_) {
+		result.emplace_back(csm);
+	}
+	return result;
 }
 
 template <typename TModel>

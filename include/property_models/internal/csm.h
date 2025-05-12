@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef NPROPERTY_MODELS_IMPL_ALLOWED
 #error "This header may not be included directly. Please include \"property_models/model.h\" instead"
 #endif
@@ -7,10 +9,17 @@
 
 namespace NPropertyModels {
 
+template <typename>
+class TPropertyModel;
+
 template <typename TModel>
 class TCSM {
+public:
+	TCSM() = delete;
+
 private:
 	friend TModel;
+	friend TPropertyModel<TModel>;
 
 	TCSM(std::vector<size_t> inputPropertyIds, std::vector<size_t> outputPropertyIds, std::function<void()> apply)
 	    : InputPropertyIds_(std::move(inputPropertyIds)), OutputPropertyIds_(std::move(outputPropertyIds)), Apply_(std::move(apply)) {
@@ -26,6 +35,9 @@ private:
 	}
 
 	void Apply() {
+		if (!Apply_) {
+			return;
+		}
 		Apply_();
 	}
 
