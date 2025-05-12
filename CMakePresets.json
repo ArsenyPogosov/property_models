@@ -1,0 +1,22 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "default",
+      "description": "Default build",
+      "cacheVariables": {
+        "PROPERTY_MODELS_BUILD_TESTS": "OFF",
+        "PROPERTY_MODELS_BUILD_EXAMPLE": "OFF"
+      }
+    },
+    {
+      "name": "full",
+      "description": "Build with tests and examples",
+      "cacheVariables": {
+        "PROPERTY_MODELS_BUILD_TESTS": "ON",
+        "PROPERTY_MODELS_BUILD_EXAMPLE": "ON"
+      }
+    }
+  ]
+}
+
