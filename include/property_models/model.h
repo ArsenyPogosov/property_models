@@ -1,5 +1,9 @@
 #pragma once
 
+#define NPROPERTY_MODELS_IMPL_ALLOWED
+#include "internal/fwd.h"
+#undef NPROPERTY_MODELS_IMPL_ALLOWED
+
 #include <cstddef>
 #include <functional>
 #include <type_traits>
@@ -17,9 +21,6 @@ namespace NPropertyModels {
 #define PM_IN NPROPERTY_MODELS_IN_IMPL
 #define PM_OUT NPROPERTY_MODELS_OUT_IMPL
 #define PM_CSM NPROPERTY_MODELS_CSM_IMPL
-
-template <typename TModel>
-class TConstraint;
 
 template <typename TModel>
 class TPropertyModel {
@@ -75,11 +76,6 @@ private:
 	std::vector<std::reference_wrapper<TConstraint<TThis>>> Constraints_;
 };
 
-enum class EAccess : uint8_t;
-
-template <typename TValue, typename TModel, EAccess ACCESS>
-class TPropertyView;
-
 template <typename TValue, typename TModel>
 class TProperty {
 public:
@@ -122,9 +118,6 @@ private:
 	const size_t Id_;
 	TValue Value_;
 };
-
-template <typename TModel>
-class TCSM;
 
 template <typename TModel>
 class TConstraint {

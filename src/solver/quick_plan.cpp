@@ -74,16 +74,16 @@ public:
 		for (size_t csmId = 0; csmId < task.CSMs.size(); ++csmId) {
 			const auto &csm = task.CSMs[csmId];
 			CSMIdToConstraintId_.Insert(csmId, csm.ConstraintId);
-			CSMIdToOutputDegree_.Insert(csmId, csm.OutputPropertieIds.size());
+			CSMIdToOutputDegree_.Insert(csmId, csm.OutputPropertyIds.size());
 			CSMIdToInputPropertyIds_[csmId] = {};
 			CSMIdToOutputPropertyIds_[csmId] = {};
 
-			for (size_t propertyId : csm.InputPropertieIds) {
+			for (size_t propertyId : csm.InputPropertyIds) {
 				propertyToConstraints[propertyId].insert(csm.ConstraintId);
 				PropertyIdToCSMs_[propertyId].insert(csmId);
 				CSMIdToInputPropertyIds_[csmId].insert(propertyId);
 			}
-			for (size_t propertyId : csm.OutputPropertieIds) {
+			for (size_t propertyId : csm.OutputPropertyIds) {
 				propertyToConstraints[propertyId].insert(csm.ConstraintId);
 				PropertyIdToCSMs_[propertyId].insert(csmId);
 				CSMIdToOutputPropertyIds_[csmId].insert(propertyId);
@@ -285,19 +285,19 @@ EApplicability TQuickPlanSolver::IsApplicable(const TTask &task) const {
 		if (csm.ConstraintId >= task.ConstraintsCount) {
 			throw std::invalid_argument("constraint id is to large");
 		}
-		for (const auto &id : csm.InputPropertieIds) {
+		for (const auto &id : csm.InputPropertyIds) {
 			if (id >= task.PropertiesCount) {
-				throw std::invalid_argument("propertie id is to large");
+				throw std::invalid_argument("property id is to large");
 			}
 		}
-		for (const auto &id : csm.OutputPropertieIds) {
+		for (const auto &id : csm.OutputPropertyIds) {
 			if (id >= task.PropertiesCount) {
-				throw std::invalid_argument("propertie id is to large");
+				throw std::invalid_argument("property id is to large");
 			}
 		}
 
-		std::unordered_set<size_t> inputSet(csm.InputPropertieIds.begin(), csm.InputPropertieIds.end());
-		for (const auto &id : csm.OutputPropertieIds) {
+		std::unordered_set<size_t> inputSet(csm.InputPropertyIds.begin(), csm.InputPropertyIds.end());
+		for (const auto &id : csm.OutputPropertyIds) {
 			if (inputSet.contains(id)) {
 				throw std::invalid_argument(
 				    "input and output properties intersect"
@@ -307,16 +307,16 @@ EApplicability TQuickPlanSolver::IsApplicable(const TTask &task) const {
 
 		auto &domain = constraintDomains[csm.ConstraintId];
 		if (domain.empty()) {
-			domain.insert(csm.InputPropertieIds.begin(), csm.InputPropertieIds.end());
-			domain.insert(csm.OutputPropertieIds.begin(), csm.OutputPropertieIds.end());
+			domain.insert(csm.InputPropertyIds.begin(), csm.InputPropertyIds.end());
+			domain.insert(csm.OutputPropertyIds.begin(), csm.OutputPropertyIds.end());
 			continue;
 		}
 
-		if (domain.size() != csm.InputPropertieIds.size() + csm.OutputPropertieIds.size()) {
+		if (domain.size() != csm.InputPropertyIds.size() + csm.OutputPropertyIds.size()) {
 			return EApplicability::NOT_APPLICABLE;
 		}
 
-		for (const auto id : csm.InputPropertieIds) {
+		for (const auto id : csm.InputPropertyIds) {
 			if (domain.contains(id)) {
 				continue;
 			}
@@ -324,7 +324,7 @@ EApplicability TQuickPlanSolver::IsApplicable(const TTask &task) const {
 			return EApplicability::NOT_APPLICABLE;
 		}
 
-		for (const auto id : csm.OutputPropertieIds) {
+		for (const auto id : csm.OutputPropertyIds) {
 			if (domain.contains(id)) {
 				continue;
 			}

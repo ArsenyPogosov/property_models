@@ -21,8 +21,8 @@ TEST_CASE("maximum matching implemets is applicable right", "[solver][maximum_ma
 		        .CSMs{
 		            {
 		                .ConstraintId = 0,
-		                .InputPropertieIds = {0},
-		                .OutputPropertieIds = {1},
+		                .InputPropertyIds = {0},
+		                .OutputPropertyIds = {1},
 		            },
 		        },
 		    },
@@ -32,8 +32,8 @@ TEST_CASE("maximum matching implemets is applicable right", "[solver][maximum_ma
 		        .CSMs{
 		            {
 		                .ConstraintId = 0,
-		                .InputPropertieIds = {0},
-		                .OutputPropertieIds = {1},
+		                .InputPropertyIds = {0},
+		                .OutputPropertyIds = {1},
 		            },
 		        },
 		    },
@@ -43,8 +43,8 @@ TEST_CASE("maximum matching implemets is applicable right", "[solver][maximum_ma
 		        .CSMs{
 		            {
 		                .ConstraintId = 0,
-		                .InputPropertieIds = {0},
-		                .OutputPropertieIds = {0},
+		                .InputPropertyIds = {0},
+		                .OutputPropertyIds = {0},
 		            },
 		        },
 		    }
@@ -60,8 +60,8 @@ TEST_CASE("maximum matching implemets is applicable right", "[solver][maximum_ma
 		    .CSMs{
 		        {
 		            .ConstraintId = 0,
-		            .InputPropertieIds = {0},
-		            .OutputPropertieIds = {1, 2},
+		            .InputPropertyIds = {0},
+		            .OutputPropertyIds = {1, 2},
 		        },
 		    },
 		};
@@ -77,18 +77,18 @@ TEST_CASE("maximum matching implemets is applicable right", "[solver][maximum_ma
 		        .CSMs{
 		            {
 		                .ConstraintId = 0,
-		                .InputPropertieIds = {0},
-		                .OutputPropertieIds = {1},
+		                .InputPropertyIds = {0},
+		                .OutputPropertyIds = {1},
 		            },
 		            {
 		                .ConstraintId = 1,
-		                .InputPropertieIds = {1},
-		                .OutputPropertieIds = {2},
+		                .InputPropertyIds = {1},
+		                .OutputPropertyIds = {2},
 		            },
 		            {
 		                .ConstraintId = 2,
-		                .InputPropertieIds = {2},
-		                .OutputPropertieIds = {0},
+		                .InputPropertyIds = {2},
+		                .OutputPropertyIds = {0},
 		            },
 		        },
 		    },
@@ -98,8 +98,8 @@ TEST_CASE("maximum matching implemets is applicable right", "[solver][maximum_ma
 		        .CSMs{
 		            {
 		                .ConstraintId = 0,
-		                .InputPropertieIds = {0},
-		                .OutputPropertieIds = {1},
+		                .InputPropertyIds = {0},
+		                .OutputPropertyIds = {1},
 		            },
 		        },
 		    }
@@ -151,8 +151,8 @@ TEST_CASE("maximum matching implemets try solve right", "[solver][maximum_matchi
 		        .CSMs{
 		            {
 		                .ConstraintId = 0,
-		                .InputPropertieIds = {0},
-		                .OutputPropertieIds = {1},
+		                .InputPropertyIds = {0},
+		                .OutputPropertyIds = {1},
 		            },
 		        },
 		    },
@@ -162,8 +162,8 @@ TEST_CASE("maximum matching implemets try solve right", "[solver][maximum_matchi
 		        .CSMs{
 		            {
 		                .ConstraintId = 0,
-		                .InputPropertieIds = {0},
-		                .OutputPropertieIds = {1},
+		                .InputPropertyIds = {0},
+		                .OutputPropertyIds = {1},
 		            },
 		        },
 		    },
@@ -173,8 +173,8 @@ TEST_CASE("maximum matching implemets try solve right", "[solver][maximum_matchi
 		        .CSMs{
 		            {
 		                .ConstraintId = 0,
-		                .InputPropertieIds = {0},
-		                .OutputPropertieIds = {0},
+		                .InputPropertyIds = {0},
+		                .OutputPropertyIds = {0},
 		            },
 		        },
 		    }
@@ -192,8 +192,8 @@ TEST_CASE("maximum matching implemets try solve right", "[solver][maximum_matchi
 		        .CSMs{
 		            {
 		                .ConstraintId = 0,
-		                .InputPropertieIds = {0},
-		                .OutputPropertieIds = {1, 2},
+		                .InputPropertyIds = {0},
+		                .OutputPropertyIds = {1, 2},
 		            },
 		        },
 		    },
@@ -203,18 +203,18 @@ TEST_CASE("maximum matching implemets try solve right", "[solver][maximum_matchi
 		        .CSMs{
 		            {
 		                .ConstraintId = 0,
-		                .InputPropertieIds = {0},
-		                .OutputPropertieIds = {1},
+		                .InputPropertyIds = {0},
+		                .OutputPropertyIds = {1},
 		            },
 		            {
 		                .ConstraintId = 1,
-		                .InputPropertieIds = {1},
-		                .OutputPropertieIds = {2},
+		                .InputPropertyIds = {1},
+		                .OutputPropertyIds = {2},
 		            },
 		            {
 		                .ConstraintId = 2,
-		                .InputPropertieIds = {2},
-		                .OutputPropertieIds = {0},
+		                .InputPropertyIds = {2},
+		                .OutputPropertyIds = {0},
 		            },
 		        },
 		    }
@@ -240,18 +240,18 @@ TEST_CASE("maximum matching implemets try solve right", "[solver][maximum_matchi
 		    .CSMs{
 		        {
 		            .ConstraintId = 0,
-		            .InputPropertieIds = {0},
-		            .OutputPropertieIds = {1},
+		            .InputPropertyIds = {0},
+		            .OutputPropertyIds = {1},
 		        },
 		        {
 		            .ConstraintId = 0,
-		            .InputPropertieIds = {0},
-		            .OutputPropertieIds = {2},
+		            .InputPropertyIds = {0},
+		            .OutputPropertyIds = {2},
 		        },
 		        {
 		            .ConstraintId = 1,
-		            .InputPropertieIds = {0},
-		            .OutputPropertieIds = {1},
+		            .InputPropertyIds = {0},
+		            .OutputPropertyIds = {1},
 		        },
 		    },
 		};
@@ -279,43 +279,43 @@ TEST_CASE("maximum matching implemets try solve right", "[solver][maximum_matchi
 		    .CSMs{
 		        {
 		            .ConstraintId = 0,
-		            .InputPropertieIds = {},
-		            .OutputPropertieIds = {2},
+		            .InputPropertyIds = {},
+		            .OutputPropertyIds = {2},
 		        },
 		        {
 		            .ConstraintId = 1,
-		            .InputPropertieIds = {2},
-		            .OutputPropertieIds = {0},
+		            .InputPropertyIds = {2},
+		            .OutputPropertyIds = {0},
 		        },
 		        {
 		            .ConstraintId = 1,
-		            .InputPropertieIds = {0},
-		            .OutputPropertieIds = {2},
+		            .InputPropertyIds = {0},
+		            .OutputPropertyIds = {2},
 		        },
 		        {
 		            .ConstraintId = 3,
-		            .InputPropertieIds = {},
-		            .OutputPropertieIds = {3},
+		            .InputPropertyIds = {},
+		            .OutputPropertyIds = {3},
 		        },
 		        {
 		            .ConstraintId = 4,
-		            .InputPropertieIds = {0, 2},
-		            .OutputPropertieIds = {3},
+		            .InputPropertyIds = {0, 2},
+		            .OutputPropertyIds = {3},
 		        },
 		        {
 		            .ConstraintId = 4,
-		            .InputPropertieIds = {0, 3},
-		            .OutputPropertieIds = {2},
+		            .InputPropertyIds = {0, 3},
+		            .OutputPropertyIds = {2},
 		        },
 		        {
 		            .ConstraintId = 4,
-		            .InputPropertieIds = {2, 3},
-		            .OutputPropertieIds = {0},
+		            .InputPropertyIds = {2, 3},
+		            .OutputPropertyIds = {0},
 		        },
 		        {
 		            .ConstraintId = 5,
-		            .InputPropertieIds = {2, 3},
-		            .OutputPropertieIds = {},
+		            .InputPropertyIds = {2, 3},
+		            .OutputPropertyIds = {},
 		        },
 		    },
 		};
@@ -334,28 +334,28 @@ TEST_CASE("maximum matching implemets try solve right", "[solver][maximum_matchi
 		    .CSMs{
 		        {
 		            .ConstraintId = 3,
-		            .InputPropertieIds = {3},
-		            .OutputPropertieIds = {4},
+		            .InputPropertyIds = {3},
+		            .OutputPropertyIds = {4},
 		        },
 		        {
 		            .ConstraintId = 1,
-		            .InputPropertieIds = {1},
-		            .OutputPropertieIds = {2},
+		            .InputPropertyIds = {1},
+		            .OutputPropertyIds = {2},
 		        },
 		        {
 		            .ConstraintId = 0,
-		            .InputPropertieIds = {0},
-		            .OutputPropertieIds = {1},
+		            .InputPropertyIds = {0},
+		            .OutputPropertyIds = {1},
 		        },
 		        {
 		            .ConstraintId = 4,
-		            .InputPropertieIds = {4},
-		            .OutputPropertieIds = {5},
+		            .InputPropertyIds = {4},
+		            .OutputPropertyIds = {5},
 		        },
 		        {
 		            .ConstraintId = 2,
-		            .InputPropertieIds = {2},
-		            .OutputPropertieIds = {3},
+		            .InputPropertyIds = {2},
+		            .OutputPropertyIds = {3},
 		        },
 		    },
 		};

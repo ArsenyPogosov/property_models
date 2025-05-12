@@ -3,6 +3,7 @@
 #endif
 
 #include <numeric>
+#include <unordered_set>
 
 #include "solver/solver.h"
 
@@ -92,6 +93,10 @@ void TPropertyModel<TModel>::Update() {
 
 	for (size_t constraintNewId = 0; constraintNewId < constraintOrder.size(); ++constraintNewId) {
 		auto &constraint = Constraints_[constraintOrder[constraintNewId]].get();
+		if (!constraint.IsEnabled()) {
+			continue;
+		}
+
 		for (auto &csmWrap : constraint.GetCSMs()) {
 			TCSM<TThis> &csm = csmWrap.get();
 
@@ -128,6 +133,19 @@ void TPropertyModel<TModel>::Update() {
 		TCSM<TThis> &csm = *backPointers[csmId];
 
 		csm.Apply();
+	}
+
+	std::unordered_set<size_t> fulfilledConstraintIds;
+	for (const auto &csmId : solution.CSMIds) {
+		size_t newConstraintId = task.CSMs[csmId].ConstraintId;
+		if (newConstraintId >= constraintOrder.size()) {
+			continue;
+		}
+		fulfilledConstraintIds.insert(constraintOrder[newConstraintId]);
+	}
+
+	for (auto &constraint : Constraints_) {
+		constraint.get().Fulfilled_ = fulfilledConstraintIds.contains(constraint.get().Id_);
 	}
 
 	Updating_ = false;

@@ -147,19 +147,19 @@ EApplicability TMaximumMatchingSolver::IsApplicable(const TTask &task) const {
 		if (csm.ConstraintId >= task.ConstraintsCount) {
 			throw std::invalid_argument("constraint id is to large");
 		}
-		for (const auto &id : csm.InputPropertieIds) {
+		for (const auto &id : csm.InputPropertyIds) {
 			if (id >= task.PropertiesCount) {
-				throw std::invalid_argument("propertie id is to large");
+				throw std::invalid_argument("property id is to large");
 			}
 		}
-		for (const auto &id : csm.OutputPropertieIds) {
+		for (const auto &id : csm.OutputPropertyIds) {
 			if (id >= task.PropertiesCount) {
-				throw std::invalid_argument("propertie id is to large");
+				throw std::invalid_argument("property id is to large");
 			}
 		}
 
-		std::unordered_set<size_t> inputSet(csm.InputPropertieIds.begin(), csm.InputPropertieIds.end());
-		for (const auto &id : csm.OutputPropertieIds) {
+		std::unordered_set<size_t> inputSet(csm.InputPropertyIds.begin(), csm.InputPropertyIds.end());
+		for (const auto &id : csm.OutputPropertyIds) {
 			if (inputSet.contains(id)) {
 				throw std::invalid_argument(
 				    "input and output properties intersect"
@@ -167,7 +167,7 @@ EApplicability TMaximumMatchingSolver::IsApplicable(const TTask &task) const {
 			}
 		}
 
-		if (csm.OutputPropertieIds.size() > 1) {
+		if (csm.OutputPropertyIds.size() > 1) {
 			return EApplicability::NOT_APPLICABLE;
 		}
 	}
@@ -197,7 +197,7 @@ std::optional<TSolution> TMaximumMatchingSolver::TrySolve(
 	};
 	matchingGraph.Edges.reserve(task.CSMs.size());
 	for (const auto &csm : task.CSMs) {
-		if (csm.OutputPropertieIds.empty()) {
+		if (csm.OutputPropertyIds.empty()) {
 			// add fictitious vertex to both parts of the graph to work around
 			// degenerate CSMs
 			matchingGraph.Edges.push_back({
@@ -209,7 +209,7 @@ std::optional<TSolution> TMaximumMatchingSolver::TrySolve(
 
 		matchingGraph.Edges.push_back({
 		    .FromId = csm.ConstraintId,
-		    .ToId = csm.OutputPropertieIds.at(0),
+		    .ToId = csm.OutputPropertyIds.at(0),
 		});
 	}
 
@@ -224,14 +224,14 @@ std::optional<TSolution> TMaximumMatchingSolver::TrySolve(
 	for (const auto &id : solution.CSMIds) {
 		const auto &csm = task.CSMs[id];
 
-		for (const auto &inputId : csm.InputPropertieIds) {
+		for (const auto &inputId : csm.InputPropertyIds) {
 			solutionGraph.Edges.push_back({
 			    .FromId = inputId + task.ConstraintsCount,
 			    .ToId = csm.ConstraintId,
 			});
 		}
 
-		for (const auto &outputId : csm.OutputPropertieIds) {
+		for (const auto &outputId : csm.OutputPropertyIds) {
 			solutionGraph.Edges.push_back({
 			    .FromId = csm.ConstraintId,
 			    .ToId = outputId + task.ConstraintsCount,

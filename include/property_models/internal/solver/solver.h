@@ -12,8 +12,8 @@ namespace NPropertyModels::NSolver {
 
 struct TCSM {
 	size_t ConstraintId;
-	std::vector<size_t> InputPropertieIds;
-	std::vector<size_t> OutputPropertieIds;
+	std::vector<size_t> InputPropertyIds;
+	std::vector<size_t> OutputPropertyIds;
 };
 
 struct TTask {
