@@ -2,11 +2,11 @@
 
 #include "property_models/model.h"
 
-PM_PROPERTY_MODEL(TLol) {
+PM_PROPERTY_MODEL(TModel) {
 public:
-	PM_PARAMETER(int, A, 1);
-	PM_PARAMETER(int, B, 2);
-	PM_PARAMETER(int, C, 3);
+	PM_PROPERTY(int, A, 0);
+	PM_PROPERTY(int, B, 0);
+	PM_PROPERTY(int, C, 0);
 
 public:
 	PM_CONSTRAINT(
@@ -51,27 +51,27 @@ public:
 };
 
 int main() {
-	TLol lol;
+	TModel model;
 
-	lol.RegisterCallback([&lol]() {
+	model.RegisterCallback([&model]() {
 		std::cout << "Object contents:\n";
 		std::cout << "  Properties:\n";
-		std::cout << "    A: " << lol.A << '\n';
-		std::cout << "    B: " << lol.B << '\n';
-		std::cout << "    C: " << lol.C << '\n';
+		std::cout << "    A: " << model.A << '\n';
+		std::cout << "    B: " << model.B << '\n';
+		std::cout << "    C: " << model.C << '\n';
 		std::cout << "  Constraints:\n";
 		std::cout << "    - name: C1\n";
-		std::cout << "      Enabled: " << std::boolalpha << lol.C1.IsEnabled() << '\n';
-		std::cout << "      Fulfilled: " << std::boolalpha << lol.C1.IsFulfilled() << '\n';
-		std::cout << "      Importance: " << lol.C1.GetImportance() << '\n';
+		std::cout << "      Enabled: " << std::boolalpha << model.C1.IsEnabled() << '\n';
+		std::cout << "      Fulfilled: " << std::boolalpha << model.C1.IsFulfilled() << '\n';
+		std::cout << "      Importance: " << model.C1.GetImportance() << '\n';
 		std::cout << "    - name: C2\n";
-		std::cout << "      IsEnabled: " << std::boolalpha << lol.C2.IsEnabled() << '\n';
-		std::cout << "      Fulfilled: " << std::boolalpha << lol.C2.IsFulfilled() << '\n';
-		std::cout << "      Importance: " << lol.C2.GetImportance() << "\n\n";
+		std::cout << "      IsEnabled: " << std::boolalpha << model.C2.IsEnabled() << '\n';
+		std::cout << "      Fulfilled: " << std::boolalpha << model.C2.IsFulfilled() << '\n';
+		std::cout << "      Importance: " << model.C2.GetImportance() << "\n\n";
 	});
 
 	{
-		auto _ = lol.Freeze();
+		auto _ = model.Freeze();
 	}
 
 	while (true) {
@@ -86,46 +86,44 @@ int main() {
 			int value = 0;
 			std::cin >> value;
 			if (cmd == "A") {
-				lol.A = value;
+				model.A = value;
 			}
 			if (cmd == "B") {
-				lol.B = value;
+				model.B = value;
 			}
 			if (cmd == "C") {
-				lol.C = value;
+				model.C = value;
 			}
 		} else if (cmd == "C1" || cmd == "C2") {
 			std::string subcmd;
 			std::cin >> subcmd;
 			if (subcmd == "enable") {
 				if (cmd == "C1") {
-					lol.C1.Enable();
+					model.C1.Enable();
 				} else if (cmd == "C2") {
-					lol.C2.Enable();
+					model.C2.Enable();
 				}
 			} else if (subcmd == "disable") {
 				if (cmd == "C1") {
-					lol.C1.Disable();
+					model.C1.Disable();
 				} else if (cmd == "C2") {
-					lol.C2.Disable();
+					model.C2.Disable();
 				}
 			} else if (subcmd == "importance") {
 				int importance = 0;
 				std::cin >> importance;
 				if (cmd == "C1") {
-					lol.C1.SetImportance(importance);
+					model.C1.SetImportance(importance);
 				} else if (cmd == "C2") {
-					lol.C2.SetImportance(importance);
+					model.C2.SetImportance(importance);
 				}
 			} else {
 				std::cout << "Unknown subcommand for constraint.\n";
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			}
 		} else if (cmd == "exit") {
 			break;
 		} else {
 			std::cout << "Unknown command\n";
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 	}
 

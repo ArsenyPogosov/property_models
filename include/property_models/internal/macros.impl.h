@@ -7,9 +7,9 @@ namespace NPropertyModels {
 #define NPROPERTY_MODELS_PROPERTY_MODEL_IMPL(name) \
 	class name : public NPropertyModels::TPropertyModel<name>
 
-#define NPROPERTY_MODELS_PARAMETER_IMPL(type, name, ...) \
-	NPropertyModels::TProperty<type, TThis> name {       \
-		*this __VA_OPT__(, ) __VA_ARGS__                 \
+#define NPROPERTY_MODELS_PROPERTY_IMPL(type, name, ...) \
+	NPropertyModels::TProperty<type, TThis> name {      \
+		*this __VA_OPT__(, ) __VA_ARGS__                \
 	}
 
 #define NPROPERTY_MODELS_IMPORTANCE_IMPL(num) num
