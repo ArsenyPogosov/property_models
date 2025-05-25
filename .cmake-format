@@ -1,0 +1,15 @@
+format:
+  line_width: 90
+  tab_size: 4
+  use_tabchars: true
+  max_pargs_hwrap: 1
+  dangle_parens: true
+  line_ending: unix
+  keyword_case: upper
+  always_wrap:
+    - add_library
+    - add_executable
+    - target_include_directories
+    - target_link_libraries
+  enable_sort: True
+
